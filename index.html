@@ -110,7 +110,6 @@
 </div>
 
 <script>
-    // массив с картинками (взяла с сайта picsum)
     var images = [
         'https://picsum.photos/id/1015/800/450',
         'https://picsum.photos/id/1018/800/450',
@@ -127,7 +126,6 @@
     var next = document.getElementById('nextBtn');
     var countDisplay = document.getElementById('counterDisplay');
 
-    // функция обновления
     function updateSlider(index) {
         if (index < 0) {
             current = total - 1;
@@ -136,12 +134,10 @@
         } else {
             current = index;
         }
-
         img.src = images[current];
         countDisplay.textContent = 'Изображение ' + (current + 1) + ' из ' + total;
     }
 
-    // обработчики событий
     prev.onclick = function() {
         updateSlider(current - 1);
     };
@@ -150,7 +146,6 @@
         updateSlider(current + 1);
     };
 
-    // показываем первую картинку при загрузке
     updateSlider(0);
 </script>
 
