@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Мой слайдер</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #e9ecef;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .slider-container {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            max-width: 700px;
+            width: 100%;
+        }
+
+        .slider-frame {
+            border-radius: 15px;
+            overflow: hidden;
+            border: 2px solid #ccc;
+            background: #eee;
+        }
+
+        .slider-image {
+            width: 100%;
+            display: block;
+            height: auto;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 10px 25px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1rem;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .btn-prev {
+            background: #6c757d;
+            color: white;
+        }
+        .btn-prev:hover {
+            background: #5a6268;
+        }
+
+        .btn-next {
+            background: #007bff;
+            color: white;
+        }
+        .btn-next:hover {
+            background: #0056b3;
+        }
+
+        .counter {
+            font-size: 1rem;
+            background: #e9ecef;
+            padding: 6px 18px;
+            border-radius: 30px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+<div class="slider-container">
+    <div class="slider-frame">
+        <img id="sliderImage" class="slider-image" src="" alt="слайд">
+    </div>
+
+    <div class="controls">
+        <div class="btn-group">
+            <button id="prevBtn" class="btn btn-prev">◀ Назад</button>
+            <button id="nextBtn" class="btn btn-next">Вперед ▶</button>
+        </div>
+        <div id="counterDisplay" class="counter">Изображение 1 из 5</div>
+    </div>
+</div>
+
+<script>
+    // массив с картинками (взяла с сайта picsum)
+    var images = [
+        'https://picsum.photos/id/1015/800/450',
+        'https://picsum.photos/id/1018/800/450',
+        'https://picsum.photos/id/1039/800/450',
+        'https://picsum.photos/id/1043/800/450',
+        'https://picsum.photos/id/1060/800/450'
+    ];
+
+    var current = 0;
+    var total = images.length;
+
+    var img = document.getElementById('sliderImage');
+    var prev = document.getElementById('prevBtn');
+    var next = document.getElementById('nextBtn');
+    var countDisplay = document.getElementById('counterDisplay');
+
+    // функция обновления
+    function updateSlider(index) {
+        if (index < 0) {
+            current = total - 1;
+        } else if (index >= total) {
+            current = 0;
+        } else {
+            current = index;
+        }
+
+        img.src = images[current];
+        countDisplay.textContent = 'Изображение ' + (current + 1) + ' из ' + total;
+    }
+
+    // обработчики событий
+    prev.onclick = function() {
+        updateSlider(current - 1);
+    };
+
+    next.onclick = function() {
+        updateSlider(current + 1);
+    };
+
+    // показываем первую картинку при загрузке
+    updateSlider(0);
+</script>
+
+</body>
+</html>
